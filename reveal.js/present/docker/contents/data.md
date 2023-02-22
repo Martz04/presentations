@@ -1,7 +1,6 @@
 ## Containerized Applications
 
 
-<!-- .slide: data-transition="fade" -->
 ## Docker
 
 https://www.docker.com/
@@ -35,7 +34,6 @@ Containers in the exited state still exist, which means you can start them again
 
 
 
-<!-- .slide: data-transition="fade" -->
 ## Docker repository
 
 
@@ -61,10 +59,133 @@ Runs docker image
 
     docker container run diamol/ch03-web-ping
 
--it means interactively
+`-it` means interactively
 
     docker run -it diamol/ch03-web-ping
 
--d means detach mode
+`-d` means detach mode
 
     docker run -d diamol/ch03-web-ping
+
+
+<!-- .slide: data-transition="fade" -->
+## Passing ENV variables
+Docker images may be packaged with a default set of configuration values for the application, 
+but you should be able to provide different configuration settings when you run a container.
+
+    docker container run --env TARGET=google.com diamol/ch03-web-ping
+
+
+<!-- .slide: data-transition="fade" -->
+## Building Docker Images
+The `Dockerfile` is a simple script you write to package up an application.
+it’s a set of instructions, and a Docker image is the `output`.
+```dockerfile
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+Base your image from pre-configured environments
+In this case with node already installed.
+```dockerfile [1]
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+You can configure a set of environment variables.
+```dockerfile [3-5]
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+`WORKDIR` specifies the current directory from the image to work with.
+We create the directory `web-ping` at the root of the image file directory.
+```dockerfile [7]
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+`COPY` Copies the file `app.js` from your current working directory
+to the directory of the image, in this case `/web-ping`
+
+Download code for [app.js](https://github.com/sixeyed/diamol/blob/master/ch03/exercises/web-ping/app.js)
+```dockerfile [8]
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+`CMD` Specifies the launch command used when we run the container.
+
+**When we run: `docker run MY_IMAGE`
+```dockerfile [10]
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+```
+
+
+<!-- .slide: data-transition="fade" -->
+Build docker image with
+
+    docker image build --tag web-ping
+
+
+<!-- .slide: data-transition="fade" -->
+[Most used commands](/present/docker/contents/commands.md)

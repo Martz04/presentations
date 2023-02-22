@@ -1,0 +1,17 @@
+.DS_Store
+.idea/
+reveal.js/.gitignore
+reveal.js/.npmignore
+reveal.js/LICENSE
+reveal.js/README.md
+reveal.js/css/
+reveal.js/demo.html
+reveal.js/dist/
+reveal.js/examples/
+reveal.js/gulpfile.js
+reveal.js/js/
+reveal.js/package-lock.json
+reveal.js/package.json
+reveal.js/plugin/
+reveal.js/test/
+
