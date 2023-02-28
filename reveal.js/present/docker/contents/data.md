@@ -189,3 +189,25 @@ Build docker image with
 
 <!-- .slide: data-transition="fade" -->
 [Most used commands](/present/docker/contents/commands.md)
+
+
+
+<!-- .slide: data-transition="fade" -->
+## Final notes
+* Docker is an ecosystem where we can run **isolated** containers.
+* Docker enables CI/CD rapid development.
+  * Build once run everywhere.
+  * Set ENV variables per stage.
+  * Ensure Scalability and Availability.
+
+
+
+## Bibliography
+Learn Docker in a Month of Lunches,
+
+ELTON STONEMAN,
+Manning,
+
+Shelter Island
+
+https://learning.oreilly.com/library/view/learn-docker-in/9781617297052/titlepage.xhtml
